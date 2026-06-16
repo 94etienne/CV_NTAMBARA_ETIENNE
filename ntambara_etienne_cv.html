@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NTAMBARA Etienne — Academic CV</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --accent:       #1A5276;
+      --accent-light: #2E86C1;
+      --accent-soft:  #D6EAF8;
+      --muted:        #566573;
+      --bg:           #F4F6F7;
+      --white:        #ffffff;
+      --border:       #dce3ea;
+    }
+
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: #2c3e50;
+      font-size: 0.92rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--accent) 0%, #154360 40%, #1a6fa8 100%);
+      color: white;
+      padding: 60px 0 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.5px;
+    }
+    .hero-title {
+      font-size: 1.05rem;
+      font-weight: 300;
+      opacity: 0.88;
+      letter-spacing: 0.4px;
+    }
+    .hero-sub {
+      font-size: 0.88rem;
+      opacity: 0.72;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      color: white !important;
+      text-decoration: none !important;
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge:hover { background: rgba(255,255,255,0.28); color: white; }
+
+    /* ── LAYOUT ── */
+    .cv-layout { display: flex; gap: 0; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 28px 0 20px;
+    }
+    .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      padding: 0 20px;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+    .sidebar-label:first-child { margin-top: 0; }
+    .nav-link-cv {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 20px;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.18s;
+    }
+    .nav-link-cv:hover, .nav-link-cv.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .nav-link-cv i { font-size: 0.95rem; width: 16px; }
+
+    /* ── MAIN ── */
+    .cv-main {
+      flex: 1;
+      padding: 36px 40px;
+      max-width: 960px;
+    }
+
+    /* ── SECTION ── */
+    .cv-section {
+      margin-bottom: 48px;
+      scroll-margin-top: 24px;
+    }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-heading i { font-size: 1rem; color: var(--accent-light); }
+
+    /* ── CARDS ── */
+    .cv-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .cv-card:hover {
+      box-shadow: 0 4px 18px rgba(26,82,118,0.10);
+      transform: translateY(-1px);
+    }
+    .cv-card-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+    .cv-card-sub {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+    .cv-card-period {
+      font-size: 0.78rem;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    /* ── SKILLS ── */
+    .skill-badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(46,134,193,0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      margin: 3px 3px 3px 0;
+      transition: all 0.18s;
+    }
+    .skill-badge:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.05);
+    }
+    .skill-category {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-category::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── LINKS ── */
+    a.cv-link {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s;
+      cursor: pointer;
+    }
+    a.cv-link:hover { color: var(--accent); text-decoration: underline; }
+
+    /* ── CERT CARD ── */
+    .cert-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      transition: box-shadow 0.2s;
+    }
+    .cert-item:hover { box-shadow: 0 3px 12px rgba(26,82,118,0.09); }
+    .cert-num {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── SUMMARY ── */
+    .summary-box {
+      background: white;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 20px;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #2c3e50;
+    }
+
+    /* ── INTERESTS ── */
+    .interest-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-soft), #e8f5fd);
+      color: var(--accent);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin: 4px;
+    }
+
+    /* ── PROJECT STATUS ── */
+    .project-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    .status-done { background: #d4edda; color: #155724; }
+    .status-progress { background: #fff3cd; color: #856404; }
+
+    /* ── DECLARATION ── */
+    .declaration-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .cv-main { padding: 20px 16px; }
+      .hero { padding: 40px 0 32px; }
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      .sidebar { display: none; }
+      .hero { background: var(--accent) !important; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="hero-name mb-1">NTAMBARA Etienne</div>
+        <div class="hero-title mb-1">Master of Science in Artificial Intelligence</div>
+        <div class="hero-sub mb-4">Assistant Lecturer in ICT — Rwanda Polytechnic, Huye College</div>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="mailto:entambara@rp.ac.rw" class="hero-badge">
+            <i class="bi bi-envelope-fill"></i> entambara@rp.ac.rw
+          </a>
+          <a href="mailto:ntambaraienne94@gmail.com" class="hero-badge">
+            <i class="bi bi-envelope-fill"></i> ntambaraienne94@gmail.com
+          </a>
+          <a href="tel:+250783716761" class="hero-badge">
+            <i class="bi bi-telephone-fill"></i> +250 783 716 761
+          </a>
+          <a href="https://github.com/94etienne" target="_blank" rel="noopener noreferrer" class="hero-badge">
+            <i class="bi bi-github"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/ntambara-etienne-7572901aa/" target="_blank" rel="noopener noreferrer" class="hero-badge">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end mt-4 mt-md-0">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3)">
+          <img src="passport.jpg" alt="NTAMBARA Etienne" style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ BODY ══════════════ -->
+<div class="cv-layout">
+
+  <!-- SIDEBAR NAV -->
+  <nav class="sidebar d-none d-md-block">
+    <div class="sidebar-label">Navigation</div>
+    <a href="#summary"        class="nav-link-cv active"><i class="bi bi-person-lines-fill"></i> Summary</a>
+    <a href="#education"      class="nav-link-cv"><i class="bi bi-mortarboard-fill"></i> Education</a>
+    <a href="#experience"     class="nav-link-cv"><i class="bi bi-briefcase-fill"></i> Experience</a>
+    <a href="#seminars"       class="nav-link-cv"><i class="bi bi-mic-fill"></i> Seminars</a>
+    <a href="#projects"       class="nav-link-cv"><i class="bi bi-code-slash"></i> Research & Projects</a>
+    <a href="#mentorship"     class="nav-link-cv"><i class="bi bi-people-fill"></i> Mentorship</a>
+    <a href="#skills"         class="nav-link-cv"><i class="bi bi-cpu-fill"></i> Skills</a>
+    <a href="#certifications" class="nav-link-cv"><i class="bi bi-patch-check-fill"></i> Certifications</a>
+    <a href="#interests"      class="nav-link-cv"><i class="bi bi-lightbulb-fill"></i> Research</a>
+    <a href="#declaration"    class="nav-link-cv"><i class="bi bi-shield-check"></i> Declaration</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="cv-main">
+
+    <!-- PROFESSIONAL SUMMARY -->
+    <section id="summary" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-person-lines-fill"></i> Professional Summary</h2>
+      <div class="summary-box">
+        Artificial Intelligence researcher, Assistant Lecturer, and Software Engineer with strong expertise in Machine Learning, Data Science, Generative AI, and Software Development. Experienced in teaching AI-related courses, supervising student innovation projects, and developing AI-powered systems for automation, education, and intelligent decision support. Passionate about leveraging Artificial Intelligence and data-driven technologies to address real-world challenges in education, smart systems, digital transformation, and sustainable development.
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-mortarboard-fill"></i> Education</h2>
+      <div class="cv-card d-flex justify-content-between align-items-start">
+        <div>
+          <div class="cv-card-title">Master of Science in Artificial Intelligence</div>
+          <div class="cv-card-sub">Nanyang Technological University, Singapore</div>
+        </div>
+        <span class="cv-card-period text-nowrap ms-3">2023 – 2024</span>
+      </div>
+      <div class="cv-card d-flex justify-content-between align-items-start">
+        <div>
+          <div class="cv-card-title">Bachelor of Science in Computer Science</div>
+          <div class="cv-card-sub">University of Rwanda</div>
+        </div>
+        <span class="cv-card-period text-nowrap ms-3">2017 – 2021</span>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL EXPERIENCE -->
+    <section id="experience" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-briefcase-fill"></i> Professional Experience</h2>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <div class="cv-card-title">Assistant Lecturer — ICT Department</div>
+            <div class="cv-card-sub">Rwanda Polytechnic, Huye College</div>
+          </div>
+          <span class="cv-card-period text-nowrap ms-3">2025 – Present</span>
+        </div>
+        <ul class="mb-0 ps-3" style="font-size:0.84rem;line-height:1.8;">
+          <li>Teaching Machine Learning (ML), Data Mining &amp; Data Warehousing, Python and Fundamentals of AI.</li>
+          <li>Training students in AI automation, prompt engineering, and Generative AI.</li>
+          <li>Designing hands-on sessions for AI-powered applications and automation pipelines.</li>
+          <li>Supervising AI and software engineering projects.</li>
+          <li>Researching ML frameworks for intelligent decision-support and land price estimation.</li>
+        </ul>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <div class="cv-card-title">CS &amp; ICT Teacher</div>
+            <div class="cv-card-sub">Rwanda Basic Education Board (REB)</div>
+          </div>
+          <span class="cv-card-period text-nowrap ms-3">2022 – 2023</span>
+        </div>
+        <ul class="mb-0 ps-3" style="font-size:0.84rem;line-height:1.8;">
+          <li>Taught Computer Science (Advanced Level) and ICT (Advanced &amp; Ordinary Levels).</li>
+          <li>Supported digital learning initiatives and ICT integration in secondary education.</li>
+          <li>Managed student academic records using CAMIS.</li>
+        </ul>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <div class="cv-card-title">Trainer &amp; Software Developer</div>
+            <div class="cv-card-sub">Computer Innovation Company Ltd</div>
+          </div>
+          <span class="cv-card-period text-nowrap ms-3">2022</span>
+        </div>
+        <ul class="mb-0 ps-3" style="font-size:0.84rem;line-height:1.8;">
+          <li>Trained RTB students in software development and programming concepts.</li>
+          <li>Participated in the design and development of institutional software systems.</li>
+        </ul>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <div class="cv-card-title">IT Support Intern</div>
+            <div class="cv-card-sub">Rwanda Basic Education Board (REB)</div>
+          </div>
+          <span class="cv-card-period text-nowrap ms-3">2021</span>
+        </div>
+        <ul class="mb-0 ps-3" style="font-size:0.84rem;line-height:1.8;">
+          <li>Contributed to the Teacher Management Information System (TMIS).</li>
+          <li>Supported ICT service delivery and system management activities.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEMINARS -->
+    <section id="seminars" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-mic-fill"></i> Seminars Attended</h2>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-1">
+          <div>
+            <div class="cv-card-title">
+              Seminar Facilitator
+              <a href="https://drive.google.com/file/d/1r51fPU1jfDJnIW5Jd53jS6Lyn1EbQg7q/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cv-link ms-2"><i class="bi bi-box-arrow-up-right"></i> View</a>
+            </div>
+            <div class="cv-card-sub">Research Grants: Funding &amp; Opportunities &nbsp;·&nbsp; Hybrid (Physical &amp; Online)</div>
+          </div>
+          <span class="cv-card-period text-nowrap ms-3">30 Mar 2026</span>
+        </div>
+        <div class="cv-card-sub mb-1">Rwanda Polytechnic — ICT Department</div>
+        <p class="mb-0" style="font-size:0.84rem;">Co-facilitated a staff seminar covering research funding concepts, grant types, major funding agencies, and grant databases. Delivered the session on funding calls, application strategy, Q&amp;A, and closing remarks.</p>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-1">
+          <div>
+            <div class="cv-card-title">
+              Research Presenter
+              <a href="https://drive.google.com/file/d/1QvaTB12hCQOJW7ohJm4gZP22rws_B5sO/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cv-link ms-2"><i class="bi bi-box-arrow-up-right"></i> View</a>
+            </div>
+            <div class="cv-card-sub">AI-Driven Incoming Students Field Recommendation in RP &nbsp;·&nbsp; Hybrid (Physical &amp; Online)</div>
+          </div>
+          <span class="cv-card-period text-nowrap ms-3">8 Dec 2025</span>
+        </div>
+        <div class="cv-card-sub mb-1">Rwanda Polytechnic — Huye College</div>
+        <p class="mb-0" style="font-size:0.84rem;">Led the main research presentation at a hybrid seminar on an AI-based field recommendation system for incoming RP students. Co-presented with Dr. Egide Nkurunziza and Mr. Joseph Uwineza.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-code-slash"></i> AI Research &amp; Software Engineering Projects</h2>
+      <p class="text-muted mb-3" style="font-size:0.83rem;">
+        <i class="bi bi-github me-1"></i> Source code available at
+        <a href="https://github.com/94etienne" target="_blank" rel="noopener noreferrer" class="cv-link">github.com/94etienne</a>
+      </p>
+
+      <div class="cv-card">
+        <div class="cv-card-title">A Machine Learning Framework for Land Price Estimation in Huye District</div>
+        <div class="cv-card-sub mb-2">Huye District</div>
+        <p class="mb-0" style="font-size:0.84rem;">Developed a machine learning framework for predicting land prices using regression techniques and geospatial data. Integrated economic and environmental features to improve prediction accuracy.</p>
+        <div class="d-flex align-items-start flex-wrap gap-2 mt-2">
+          <a href="https://doi.org/10.36948/ijfmr.2026.v08i03.80153" target="_blank" rel="noopener noreferrer" class="cv-link flex-grow-1" style="word-break:break-all;min-width:0;">
+            <i class="bi bi-journal-text"></i> https://doi.org/10.36948/ijfmr.2026.v08i03.80153
+          </a>
+          <span class="project-status status-done flex-shrink-0">Published</span>
+        </div>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <div class="flex-grow-1">
+            <div class="cv-card-title">AI Driven for Incoming Students Field Recommendation in Rwanda Polytechnic</div>
+            <p class="mb-0 mt-1" style="font-size:0.84rem;">Developed an AI-based recommendation system for student academic program placement. Applied machine learning techniques to analyze student performance and subject combinations.</p>
+          </div>
+          <span class="project-status status-progress flex-shrink-0">Accepted and soon will be published</span>
+        </div>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <div class="flex-grow-1">
+            <div class="cv-card-title">Computer Innovation Technology Ltd (CIT)</div>
+            <div class="cv-card-sub mb-2">Internship Management Platform</div>
+            <p class="mb-0" style="font-size:0.84rem;">Developed an internship management platform used by TVET students at CIT Company.</p>
+          </div>
+          <div class="text-end flex-shrink-0">
+            <span class="project-status status-done mb-2 d-block">Live</span>
+            <a href="https://citttech.com/" target="_blank" rel="noopener noreferrer" class="cv-link">
+              <i class="bi bi-globe"></i> citttech.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <div class="flex-grow-1">
+            <div class="cv-card-title">Open Inventory Management System (OIMS)</div>
+            <p class="mb-0 mt-1" style="font-size:0.84rem;">Developed a web-based inventory and asset tracking system. Funded by the Laidlaw Undergraduate Research Program. Automated institutional asset monitoring and reporting processes.</p>
+          </div>
+          <span class="project-status status-done flex-shrink-0">Completed</span>
+        </div>
+      </div>
+
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <div class="flex-grow-1">
+            <div class="cv-card-title">Teaching &amp; Demonstration AI Projects</div>
+            <p class="mb-0 mt-1" style="font-size:0.84rem;">Developed multiple AI and software engineering projects for teaching, research, and demonstration. Implemented machine learning applications, automation systems, and real-world AI solutions to support practical learning.</p>
+          </div>
+          <div class="d-flex flex-column gap-1 flex-shrink-0">
+            <a href="https://youtu.be/0jxNwSFXRfY" target="_blank" rel="noopener noreferrer" class="cv-link">
+              <i class="bi bi-youtube"></i> View Presentation
+            </a>
+            <a href="https://youtu.be/Af3dVkk0PbM?si=zFGh_QQ6rcCLamVx" target="_blank" rel="noopener noreferrer" class="cv-link">
+              <i class="bi bi-play-circle-fill"></i> View Live Class
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENTORSHIP -->
+    <section id="mentorship" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-people-fill"></i> Mentorship &amp; Leadership</h2>
+      <div class="cv-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <div class="cv-card-title">Mentor</div>
+            <div class="cv-card-sub">RP Skills Challenge 2026 Hackathon</div>
+          </div>
+          <span class="cv-card-period">2026</span>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="fw-semibold mb-2" style="font-size:0.8rem;color:var(--accent)">
+              <i class="bi bi-check2-circle me-1"></i> Responsibilities
+            </div>
+            <ul class="mb-0 ps-3" style="font-size:0.83rem;line-height:1.8;">
+              <li>Guided AI, IoT, and software innovation projects.</li>
+              <li>Mentored student teams in software development, AI implementation, and solution design.</li>
+              <li>Supported students in developing AI projects using modern tools.</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="fw-semibold mb-2" style="font-size:0.8rem;color:var(--accent)">
+              <i class="bi bi-diagram-3-fill me-1"></i> Supervised Projects
+            </div>
+            <ul class="mb-0 ps-3" style="font-size:0.83rem;line-height:1.8;">
+              <li>AI-Based Solution to Fight Vandalism in Power Infrastructure</li>
+              <li>Inventory Management System for End User Equipment</li>
+              <li>Smart City Training Laboratory for TVET Institutions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-cpu-fill"></i> Technical Skills</h2>
+      <div class="cv-card">
+        <div class="skill-category">Programming</div>
+        <span class="skill-badge">Python</span>
+        <span class="skill-badge">Java</span>
+        <span class="skill-badge">C</span>
+        <span class="skill-badge">C++</span>
+        <span class="skill-badge">JavaScript</span>
+        <span class="skill-badge">React.js</span>
+        <span class="skill-badge">Node.js</span>
+        <span class="skill-badge">PHP</span>
+
+        <div class="skill-category">Data Science</div>
+        <span class="skill-badge">Data Analysis</span>
+        <span class="skill-badge">Data Visualization</span>
+        <span class="skill-badge">Pandas</span>
+        <span class="skill-badge">NumPy</span>
+        <span class="skill-badge">Statistical Analysis</span>
+
+        <div class="skill-category">AI / Machine Learning</div>
+        <span class="skill-badge">TensorFlow</span>
+        <span class="skill-badge">PyTorch</span>
+        <span class="skill-badge">Scikit-learn</span>
+        <span class="skill-badge">XGBoost</span>
+
+        <div class="skill-category">Generative AI</div>
+        <span class="skill-badge">OpenAI APIs</span>
+        <span class="skill-badge">ChatGPT</span>
+        <span class="skill-badge">Claude</span>
+        <span class="skill-badge">LangChain</span>
+        <span class="skill-badge">RAG</span>
+        <span class="skill-badge">Prompt Engineering</span>
+        <span class="skill-badge">Pinecone</span>
+        <span class="skill-badge">n8n</span>
+
+        <div class="skill-category">Databases</div>
+        <span class="skill-badge">MySQL</span>
+        <span class="skill-badge">PostgreSQL</span>
+        <span class="skill-badge">MongoDB</span>
+
+        <div class="skill-category">Tools &amp; Platforms</div>
+        <span class="skill-badge">GitHub</span>
+        <span class="skill-badge">Linux</span>
+        <span class="skill-badge">FastAPI</span>
+        <span class="skill-badge">REST APIs</span>
+        <span class="skill-badge">Gradio</span>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-patch-check-fill"></i> Certifications</h2>
+
+      <div class="cert-item">
+        <div class="d-flex align-items-center gap-3">
+          <div class="cert-num">1</div>
+          <span style="font-size:0.88rem;font-weight:500;">Data Analysis with Python and SQL</span>
+        </div>
+        <a href="https://www.udemy.com/certificate/UC-7e9cfe94-948d-4746-bae5-56833370cfd9/" target="_blank" rel="noopener noreferrer" class="cv-link">
+          <i class="bi bi-box-arrow-up-right"></i> View Certificate
+        </a>
+      </div>
+
+      <div class="cert-item">
+        <div class="d-flex align-items-center gap-3">
+          <div class="cert-num">2</div>
+          <span style="font-size:0.88rem;font-weight:500;">Microsoft Certified Educator</span>
+        </div>
+        <a href="https://drive.google.com/file/d/11xEi741QyV7B5HhtSgIzQ4nrbW2sOC4F/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cv-link">
+          <i class="bi bi-box-arrow-up-right"></i> View Certificate
+        </a>
+      </div>
+
+      <div class="cert-item">
+        <div class="d-flex align-items-center gap-3">
+          <div class="cert-num">3</div>
+          <span style="font-size:0.88rem;font-weight:500;">RP Skills Challenge 2026 Hackathon Mentorship Certificate</span>
+        </div>
+        <a href="https://drive.google.com/file/d/1J7WzktfXfn1D6V4xQNazx1QxkMyjlKH_/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cv-link">
+          <i class="bi bi-box-arrow-up-right"></i> View Certificate
+        </a>
+      </div>
+    </section>
+
+    <!-- RESEARCH INTERESTS -->
+    <section id="interests" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-lightbulb-fill"></i> Research Interests</h2>
+      <div class="cv-card">
+        <div class="interest-tag">Artificial Intelligence</div>
+        <div class="interest-tag">Machine Learning</div>
+        <div class="interest-tag">Generative AI</div>
+        <div class="interest-tag">Data Science</div>
+        <div class="interest-tag">Educational Technology</div>
+        <div class="interest-tag">Recommendation Systems</div>
+        <div class="interest-tag">Smart Systems</div>
+        <div class="interest-tag">Computer Vision</div>
+        <div class="interest-tag">AI Automation</div>
+        <div class="interest-tag">Intelligent Decision Support Systems</div>
+      </div>
+    </section>
+
+    <!-- DECLARATION -->
+    <section id="declaration" class="cv-section">
+      <h2 class="section-heading"><i class="bi bi-shield-check"></i> Declaration</h2>
+      <div class="declaration-box">
+        <p class="mb-4" style="font-size:0.88rem;">I certify that the information provided in this curriculum vitae is accurate and complete to the best of my knowledge.</p>
+        <div>
+          <div class="fw-bold" style="color:var(--accent);font-size:0.95rem;">NTAMBARA Etienne</div>
+          <div class="text-muted" style="font-size:0.82rem;">Assistant Lecturer in ICT</div>
+          <div class="text-muted" style="font-size:0.82rem;">Rwanda Polytechnic — Huye College</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-4" style="color:var(--muted);font-size:0.75rem;border-top:1px solid var(--border);">
+      NTAMBARA Etienne &nbsp;·&nbsp; Academic CV &nbsp;·&nbsp;
+      <a href="mailto:entambara@rp.ac.rw" style="color:var(--muted);">entambara@rp.ac.rw</a> ||
+      <a href="mailto:ntambaraienne94@gmail.com" style="color:var(--muted);">ntambaraienne94@gmail.com</a>
+    </footer>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('.cv-section');
+  const navLinks = document.querySelectorAll('.nav-link-cv');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const id = entry.target.getAttribute('id');
+        const active = document.querySelector(`.nav-link-cv[href="#${id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
